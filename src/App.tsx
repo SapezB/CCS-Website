@@ -10,8 +10,11 @@ import { ProjectDetail } from "./pages/ProjectDetail";
 import { PrivacyPolicy } from "./pages/PrivacyPolicy";
 
 export default function App() {
+  // use BASE_URL from Vite for basename (matches `base` config)
+  const basename = import.meta.env.BASE_URL || "/";
+
   return (
-    <Router>
+    <Router basename={basename}>
       <Layout>
         <Routes>
           <Route path="/" element={<Home />} />
