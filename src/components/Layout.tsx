@@ -26,7 +26,7 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
         <Link to="/" className="flex items-center gap-2">
           <img
-            src="/src/images/ccs-logo-2.1.png"
+            src="src\images\ccs-logo-2.1.png"
             alt="CCS London Logo"
             className="h-10 w-auto object-contain"
           />
@@ -132,7 +132,7 @@ export const Footer = () => (
         <div className="flex items-center gap-2 mb-6">
           <div className="w-8 h-8 flex items-center justify-center rounded">
             <img
-              src="/src/images/ccs-logo-2.1.png"
+              src="src\images\ccs-logo-2.1.png"
               alt="CCS London Logo"
               className="h-10 w-auto object-contain"
             />
