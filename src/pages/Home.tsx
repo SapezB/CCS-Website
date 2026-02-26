@@ -272,7 +272,7 @@ export const Home = () => {
               className="transition-opacity hover:opacity-80"
             >
               <img
-                src="https://www.ccs-london.co.uk/wp-content/uploads/sites/8/2025/01/xcoconstructor.webp.pagespeed.ic.jfaQT1axYG.webp"
+                src="src/images/xcoconstructor-logo.webp"
                 alt="CoConstruct - A Buildertrend Company"
                 className="h-8 md:h-10 w-auto"
                 referrerPolicy="no-referrer"
