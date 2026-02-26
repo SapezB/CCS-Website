@@ -260,6 +260,9 @@ export const Footer = () => (
   </footer>
 );
 
+// important imports for SEO image
+import defaultHomeImg from "../images/home/home-image-1.jpg";
+
 export const Layout = ({ children }: { children: React.ReactNode }) => {
   const { pathname } = useLocation();
 
@@ -292,7 +295,9 @@ export const Layout = ({ children }: { children: React.ReactNode }) => {
 
   React.useEffect(() => {
     // Update SEO meta tags (description, Open Graph, Twitter, canonical)
-    const defaultImage = `${window.location.origin}/src/images/home/home-image-1.jpg`;
+    // use a hard-imported image so the build places it correctly and the URL
+    // is valid regardless of route or base path.
+    const defaultImage = defaultHomeImg;
 
     const pageDescriptions: Record<string, string> = {
       "/": "CCS London — premium construction services in London. Design, build and renovate your home with quality and care.",

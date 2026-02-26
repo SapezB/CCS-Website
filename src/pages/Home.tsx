@@ -17,6 +17,14 @@ import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 
+// service preview images used only on the home page:
+import extensionsImg from "../images/services/extensions.jpg";
+import loftImg from "../images/services/loft-conversions.webp";
+import refurbImg from "../images/services/refurbishments.webp";
+
+// small logos used on the home page
+import coconstructLogo from "../images/xcoconstructor-logo.webp";
+
 export const Home = () => {
   const homeImages = import.meta.glob(
     "../images/home/*.{png,jpg,jpeg,webp,svg}",
@@ -166,21 +174,28 @@ export const Home = () => {
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
+            {/**
+            We import these three service preview images at the top of the file so
+            that Vite processes them correctly and they resolve to absolute URLs
+            (works on every route and in production).  Using a plain string like
+            "src/images/..." makes the browser treat it as a relative path,
+            which breaks when you’re on a nested route such as `/services`.
+          */}
             {[
               {
                 title: "Extensions",
                 desc: "Expand your living space with seamless architectural extensions.",
-                img: "src/images/services/extensions.jpg",
+                img: extensionsImg,
               },
               {
                 title: "Loft Conversions",
                 desc: "Transform unused attic space into beautiful, functional rooms.",
-                img: "src/images/services/loft-conversions.webp",
+                img: loftImg,
               },
               {
                 title: "Refurbishments",
                 desc: "Complete home transformations with premium finishes.",
-                img: "src/images/services/refurbishments.webp",
+                img: refurbImg,
               },
             ].map((s, i) => (
               <div key={i} className="group cursor-pointer">
@@ -272,7 +287,7 @@ export const Home = () => {
               className="transition-opacity hover:opacity-80"
             >
               <img
-                src="src/images/xcoconstructor-logo.webp"
+                src={coconstructLogo}
                 alt="CoConstruct - A Buildertrend Company"
                 className="h-8 md:h-10 w-auto"
                 referrerPolicy="no-referrer"

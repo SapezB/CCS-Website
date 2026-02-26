@@ -33,6 +33,17 @@ npm run build
 npm run preview
 ```
 
+
+### Deployment
+
+A GitHub Action (`.github/workflows/deploy.yml`) is already configured to run on every push to `main` — it builds the site and publishes the `dist` folder to GitHub Pages. You can also deploy manually with:
+
+```bash
+npm run deploy    # builds and pushes `dist` to the gh-pages branch
+```
+
+Ensure the `base` setting in `vite.config.ts` matches your repo name (e.g. `/CCS-Website/`).
+
 ## Project structure
 
 - `index.html` — base HTML with site-wide SEO and JSON-LD schema
