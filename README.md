@@ -12,13 +12,6 @@ Deploy to any static host (Netlify, Vercel, GitHub Pages). Example production do
 
 For GitHub Pages deployments, you must set a base path that matches the repository name. Vite uses `base` and React Router uses `basename`:
 
-```bash
-# replace repo-name with your GitHub repository
-export VITE_BASE="/repo-name/"
-npm run build
-```
-
-The `vite.config.ts` file reads `VITE_BASE` and `App.tsx` passes `import.meta.env.BASE_URL` to the `<Router>` component. If you see a blank page on Pages, it usually means the JS bundle couldn't be found (wrong base) or the router path isn't matching; switching to `HashRouter` is another way to avoid history-mode issues.
 
 ## Getting started
 
