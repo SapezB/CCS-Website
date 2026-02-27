@@ -10,12 +10,8 @@ import {
   Search,
 } from "lucide-react";
 import { Link } from "react-router-dom";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/effect-fade";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+import useEmblaCarousel from "embla-carousel-react";
+import Autoplay from "embla-carousel-autoplay";
 
 // service preview images used only on the home page:
 import extensionsImg from "../images/services/extensions.jpg";
@@ -34,6 +30,33 @@ export const Home = () => {
       import: "default",
     },
   ) as Record<string, string>;
+
+  const imageArray = Object.values(homeImages);
+  console.log("home images:", imageArray.length);
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, align: "center" },
+    [Autoplay({ delay: 5000, stopOnInteraction: false })],
+  );
+  const [selectedIndex, setSelectedIndex] = React.useState(0);
+
+  React.useEffect(() => {
+    if (!emblaApi) return;
+
+    const handleSelect = () => {
+      // use the correct method name from Embla API
+      const idx = emblaApi.selectedScrollSnap();
+      if (idx !== undefined) {
+        setSelectedIndex(idx % imageArray.length);
+      }
+    };
+
+    emblaApi.on("select", handleSelect);
+    handleSelect();
+
+    return () => {
+      emblaApi.off("select", handleSelect);
+    };
+  }, [emblaApi, imageArray.length]);
   return (
     <>
       {/* Hero Section */}
@@ -79,27 +102,41 @@ export const Home = () => {
             transition={{ duration: 0.8, delay: 0.2 }}
             className="relative"
           >
+            {/* Embla Carousel */}
             <div className="aspect-[4/5] rounded-2xl overflow-hidden shadow-2xl bg-stone-100">
-              <Swiper
-                modules={[Autoplay, EffectFade, Navigation, Pagination]}
-                effect="fade"
-                autoplay={{ delay: 5000, disableOnInteraction: false }}
-                loop={true}
-                navigation={true}
-                pagination={{ clickable: true }}
-                className="w-full h-full hero-swiper"
-              >
-                {Object.values(homeImages).map((src, index) => (
-                  <SwiperSlide key={index}>
-                    <img
-                      src={src}
-                      alt={`Construction Excellence ${index + 1}`}
-                      className="w-full h-full object-cover"
-                      referrerPolicy="no-referrer"
-                    />
-                  </SwiperSlide>
+              <div className="embla h-full" ref={emblaRef}>
+                <div className="embla__container h-full flex">
+                  {imageArray.map((src, index) => (
+                    <div
+                      key={index}
+                      className="embla__slide flex-[0_0_100%] h-full min-w-0"
+                    >
+                      <img
+                        src={src}
+                        alt={`Construction Excellence ${index + 1}`}
+                        className="w-full h-full object-cover"
+                        referrerPolicy="no-referrer"
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Pagination dots */}
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex gap-2">
+                {imageArray.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => emblaApi?.scrollTo(index)}
+                    className={`w-2 h-2 rounded-full transition-all ${
+                      index === selectedIndex
+                        ? "bg-white w-8"
+                        : "bg-white/50 hover:bg-white/75"
+                    }`}
+                    aria-label={`Go to slide ${index + 1}`}
+                  />
                 ))}
-              </Swiper>
+              </div>
             </div>
             <div className="absolute -bottom-6 -left-6 bg-white p-6 rounded-xl shadow-xl hidden md:block border border-stone-100 z-10">
               <div className="flex items-center gap-4">

@@ -114,7 +114,7 @@ export const Navbar = () => {
               <Link
                 to="/contact"
                 onClick={() => setIsOpen(false)}
-                className="bg-stone-900 text-white px-5 py-3 rounded font-semibold mt-2 text-center"
+                className="bg-sky-900 text-white px-5 py-3 rounded font-semibold mt-2 text-center"
               >
                 Get a Quote
               </Link>
