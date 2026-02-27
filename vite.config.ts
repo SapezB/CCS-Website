@@ -7,7 +7,7 @@ export default defineConfig(({mode}) => {
   const env = loadEnv(mode, '.', '');
   // Vite uses BASE_URL to resolve assets and router basename.
   // When deploying to GitHub Pages under a repo, set VITE_BASE to "/your-repo-name/".
-  const base = '/CCS-Website/';
+  const base = '/';
 
   return {
     base,
